@@ -16,6 +16,9 @@
                     <p class="card-text">
                         {{ $post->body }}
                     </p>
+                    <a class="card-link" href="{{ route('posts.show', ['post' => $post]) }}">
+                        続きを読む
+                    </a>
                 </div>
                 <div class="card-footer">
                     <span class="mr-2">
