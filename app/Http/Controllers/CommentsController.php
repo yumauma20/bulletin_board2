@@ -42,4 +42,14 @@ class CommentsController extends Controller
         return redirect()->route('posts.show', ['post' => $comment->post_id]);
     }
 
+    public function destroy($id)
+    {
+        $comment = Comment::findOrFail($id);
+
+        \DB::transaction(function()use ($comment){
+            $comment->delete();
+        });
+
+        return redirect()->route('top');
+    }
 }
