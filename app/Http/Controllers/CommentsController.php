@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Post;
+use App\Comment;
 
 class CommentsController extends Controller
 {
@@ -19,4 +20,26 @@ class CommentsController extends Controller
 
         return redirect()->route('posts.show', ['post' => $post]);
     }
+
+    public function edit($id)
+    {
+        $comment = Comment::findOrFail($id);
+
+        return view('comments.edit', [
+            'comment' => $comment,
+        ]);
+    }
+
+    public function update($id, Request $request)
+    {
+        $params = $request->validate([
+            'body' => 'required|max:2000',
+        ]);
+
+        $comment = comment::findOrFail($id);
+        $comment->fill($params)->save();
+
+        return redirect()->route('posts.show', ['post' => $comment->post_id]);
+    }
+
 }

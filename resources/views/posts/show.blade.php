@@ -53,6 +53,9 @@
                         <p class="mt-2">
                             {!! nl2br(e($comment->body)) !!}
                         </p>
+                        <a class="btn btn-primary" href="{{ route('comments.edit', ['comment' => $comment]) }}">
+                            編集する
+                        </a>
                     </div>
                 @empty
                     <p>コメントはまだありません。</p>
