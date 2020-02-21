@@ -3,6 +3,11 @@
 @section('content')
     <div class="container mt-4">
         <div class="border p-4">
+            <div class="mb-4 text-left">
+                <a class="btn btn-success" href="{{ route('top') }}">
+                    投稿一覧に戻る
+                </a>
+            </div>
             <div class="mb-4 text-right">
                 <a class="btn btn-primary" href="{{ route('posts.edit', ['post' => $post]) }}">
                     編集する
