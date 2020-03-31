@@ -24,11 +24,11 @@
             <p class="mb-5">
                 {!! nl2br(e($post->body)) !!}
             </p>
+            <span class="h6 mb-4">投稿者:{{ $user->name }}さん</span>
             <section>
                 <h2 class="h5 mb-4">
                     コメント
                 </h2>
-
             <form class="mb-4" method="POST" action="{{ route('comments.store') }}">
                 @csrf
                 <input name="post_id" type="hidden" value="{{ $post->id }}">

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Post;
+use App\User;
 
 class PostsController extends Controller
 {
@@ -40,9 +41,11 @@ class PostsController extends Controller
     public function show($post_id)
     {
         $post = Post::findOrFail($post_id);
+        $user = User::findOrFail($post->user_id);
 
         return view('posts.show', [
             'post' => $post,
+            'user' => $user,
         ]);
     }
 
