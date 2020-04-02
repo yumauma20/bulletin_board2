@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
+use App\User;
 use App\Post;
 use App\Comment;
 
@@ -16,7 +18,14 @@ class CommentsController extends Controller
         ]);
 
         $post = Post::findOrFail($params['post_id']);
-        $post->comments()->create($params);
+        $user = User::findOrFail(Auth::User()->id);
+        $user_id = $user->id;
+            
+        $comment = new Comment();
+        $comment->body = $request->body;
+        $comment->user_id = $user_id;
+
+        $post->comments()->save($comment);
 
         return redirect()->route('posts.show', ['post' => $post]);
     }

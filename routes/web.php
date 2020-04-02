@@ -1,7 +1,13 @@
 <?php
 
-Route::get('/','PostsController@index')->name('top');
+Route::group(['middleware' => 'auth'], function() {
 
-Route::resource('posts', 'PostsController', ['only' => ['create', 'store', 'show', 'edit', 'update', 'destroy']]);
+    Route::get('/','PostsController@index')->name('top');
 
-Route::resource('comments','CommentsController',['only' => ['store', 'edit', 'update', 'destroy']]);
+    Route::resource('posts', 'PostsController', ['only' => ['create', 'store', 'show', 'edit', 'update', 'destroy']]);
+
+    Route::resource('comments','CommentsController',['only' => ['store', 'edit', 'update', 'destroy']]);
+
+});
+
+Auth::routes();
