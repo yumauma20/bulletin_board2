@@ -75,6 +75,8 @@ class PostsController extends Controller
     {
         $post = Post::findOrFail($post_id);
 
+        $this->authorize('delete', $post);
+
         \DB::transaction(function()use ($post){
             $post->comments()->delete();
             $post->delete();

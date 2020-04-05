@@ -12,11 +12,15 @@
                 <a class="btn btn-primary" href="{{ route('posts.edit', ['post' => $post]) }}">
                     編集する
                 </a>
-            <form style="display: inline-block;" method="POST" action="{{ route('posts.destroy', ['post' => $post]) }}">
-                @csrf
-                @method('DELETE')
-                <button class="btn btn-danger">削除する</button>
-            </form>
+
+            @if(Auth::user()->id === $post->user_id)
+                <form style="display: inline-block;" method="POST" action="{{ route('posts.destroy', ['post' => $post]) }}">
+                    @csrf
+                    @method('DELETE')
+                    <button class="btn btn-danger">削除する</button>
+                </form>
+            @endif
+            
             </div>  
             <h1 class="h5 mb-4">
                 {{ $post->title }}
