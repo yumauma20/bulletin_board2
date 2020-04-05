@@ -53,6 +53,8 @@ class PostsController extends Controller
     {
         $post = Post::findOrFail($post_id);
 
+        $this->authorize('update', $post);
+
         return view('posts.edit', [
             'post' => $post,
         ]);
@@ -66,6 +68,9 @@ class PostsController extends Controller
         ]);
 
         $post = Post::findOrFail($post_id);
+
+        $this->authorize('update', $post);
+
         $post->fill($params)->save();
 
         return redirect()->route('posts.show', ['post' => $post]);
@@ -74,6 +79,8 @@ class PostsController extends Controller
     public function destroy($post_id)
     {
         $post = Post::findOrFail($post_id);
+
+        $this->authorize('delete', $post);
 
         \DB::transaction(function()use ($post){
             $post->comments()->delete();
