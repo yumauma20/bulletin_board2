@@ -34,6 +34,8 @@ class CommentsController extends Controller
     {
         $comment = Comment::findOrFail($id);
 
+        $this->authorize('update', $comment);
+
         return view('comments.edit', [
             'comment' => $comment,
         ]);
@@ -46,6 +48,9 @@ class CommentsController extends Controller
         ]);
 
         $comment = comment::findOrFail($id);
+
+        $this->authorize('update', $comment);
+
         $comment->fill($params)->save();
 
         return redirect()->route('posts.show', ['post' => $comment->post_id]);
@@ -54,6 +59,8 @@ class CommentsController extends Controller
     public function destroy($id)
     {
         $comment = Comment::findOrFail($id);
+
+        $this->authorize('delete', $comment);
 
         \DB::transaction(function()use ($comment){
             $comment->delete();

@@ -60,14 +60,18 @@
                         <p class="mt-2">
                             {!! nl2br(e($comment->body)) !!}
                         </p>
-                        <a class="btn btn-primary" href="{{ route('comments.edit', ['comment' => $comment]) }}">
-                            編集する
-                        </a>
-                        <form style="display: inline-block;" method="POST" action="{{ route('comments.destroy', ['comment' => $comment]) }}">
-                            @csrf
-                            @method('DELETE')
-                            <button class="btn btn-danger">削除する</button>
-                        </form>
+
+                        @if(Auth::user()->id === $comment->user_id)
+                            <a class="btn btn-primary" href="{{ route('comments.edit', ['comment' => $comment]) }}">
+                                編集する
+                            </a>
+                            <form style="display: inline-block;" method="POST" action="{{ route('comments.destroy', ['comment' => $comment]) }}">
+                                @csrf
+                                @method('DELETE')
+                                <button class="btn btn-danger">削除する</button>
+                            </form>
+                        @endif
+                        
                     </div>
                 @empty
                     <p>コメントはまだありません。</p>

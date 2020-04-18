@@ -32,5 +32,6 @@ class AppServiceProvider extends ServiceProvider
 
     protected $policies = [
         'App\Post' => 'App\Policies\PostPolicy',
+        'App\Comment' => 'App\Policies\CommentPolicy'
     ];
 }
