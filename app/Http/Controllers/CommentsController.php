@@ -10,6 +10,11 @@ use App\Comment;
 
 class CommentsController extends Controller
 {
+    /**
+     * コメントを投稿する
+     * 
+     * @param Request $request
+     */
     public function store(Request $request)
     {
         $params = $request->validate([
@@ -30,7 +35,14 @@ class CommentsController extends Controller
         return redirect()->route('posts.show', ['post' => $post]);
     }
 
-    public function edit($id)
+
+
+    /**
+    * コメントを編集する
+    *
+    * @param  int $id
+    */
+    public function edit(int $id)
     {
         $comment = Comment::findOrFail($id);
 
@@ -41,7 +53,15 @@ class CommentsController extends Controller
         ]);
     }
 
-    public function update($id, Request $request)
+
+
+    /**
+     * コメントを更新する
+     * 
+     * @param int $id
+     * @param Reqiest $request
+     */
+    public function update(int $id, Request $request)
     {
         $params = $request->validate([
             'body' => 'required|max:2000',
@@ -56,7 +76,14 @@ class CommentsController extends Controller
         return redirect()->route('posts.show', ['post' => $comment->post_id]);
     }
 
-    public function destroy($id)
+
+
+    /**
+     * コメントを削除
+     * 
+     * @param int $id
+     */
+    public function destroy(int $id)
     {
         $comment = Comment::findOrFail($id);
 
