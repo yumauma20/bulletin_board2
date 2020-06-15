@@ -3,7 +3,7 @@
 @section('content')
     <div class="container mt-4">
         <div class="mb-4">
-            <a href="{{ route('posts.create') }}" create="btn btn-primary">
+            <a class="btn btn-primary" href="{{ route('posts.create') }}" create="btn btn-primary">
                 投稿を新規作成する
             </a>
         </div>
@@ -16,7 +16,7 @@
                     <p class="card-text">
                         {{ $post->body }}
                     </p>
-                    <a class="card-link" href="{{ route('posts.show', ['post' => $post]) }}">
+                    <a class="btn btn-primary" href="{{ route('posts.show', ['post' => $post]) }}">
                         続きを読む
                     </a>
                 </div>
