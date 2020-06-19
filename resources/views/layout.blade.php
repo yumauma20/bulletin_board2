@@ -9,6 +9,7 @@
     href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
     integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
     crossorigin="anonymous">
+    <link href="{{ mix('css/app.css') }}" rel="stylesheet" type="text/css">
 </head>
 <body>
     <header class="navbar navbar-dark bg-dark">
@@ -32,6 +33,10 @@
             </div>
         </div>
     </header>
+    <div id="app">
+      <example-component></example-component>
+    </div>
+    <script src="{{mix('js/app.js')}}"></script>
 
     <div>
         @yield('content')
