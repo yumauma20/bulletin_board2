@@ -19,11 +19,10 @@ class CommentsController extends Controller
 
         $post = Post::findOrFail($params['post_id']);
         $user = User::findOrFail(Auth::User()->id);
-        $user_id = $user->id;
             
         $comment = new Comment();
         $comment->body = $request->body;
-        $comment->user_id = $user_id;
+        $comment->user_id = $user->id;
 
         $post->comments()->save($comment);
 

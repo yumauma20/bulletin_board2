@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use App\Post;
 use App\User;
 
@@ -43,9 +44,19 @@ class PostsController extends Controller
         $post = Post::findOrFail($post_id);
         $user = User::findOrFail($post->user_id);
 
+        $comments = DB::table('comments');
+        $comment = $comments->where('post_id',$post->id)->get();
+        $comment_user_name = [];
+        foreach($comment as $value){
+            $comment_user_id = $value->user_id;
+            $user_data = User::findOrFail($comment_user_id);
+            $comment_user_name[] = $user_data->name;
+        }
+
         return view('posts.show', [
             'post' => $post,
             'user' => $user,
+            'comment_user_name' => $comment_user_name,
         ]);
     }
 

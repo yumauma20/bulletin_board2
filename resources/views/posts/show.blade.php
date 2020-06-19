@@ -60,7 +60,7 @@
                         <p class="mt-2">
                             {!! nl2br(e($comment->body)) !!}
                         </p>
-
+                        <span class="h6 mb-4">投稿者:{{ $comment_user_name[$loop->index] }}さん</span>
                         @if(Auth::user()->id === $comment->user_id)
                             <a class="btn btn-primary" href="{{ route('comments.edit', ['comment' => $comment]) }}">
                                 編集する
